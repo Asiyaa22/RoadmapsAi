@@ -1,28 +1,18 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Plan(){
-    //Making API Calls
-    const [plans, setPlans] = useState([]);
+    const navigate = useNavigate();
 
-    const fetchPlans = async () => {
-        try {
-            const response = await fetch("http://localhost:3000/plans");
-            const data = response.text;
-            console.log(data);
-            setPlans(data);
-        }catch(error){
-            console.log("Error Fetching PLans", error);
-        }
-    };
-
-
+    function handleClick(){
+        navigate("/register");
+    }
+    
     return(
         <div className="plan">
             <div className="free">
                 <h2>Freemium</h2>
                 <h5>get Started with our free plan</h5>
-                <button onClick={fetchPlans}>Sign Up</button>
-                <p>{plans}</p>
+                <button onClick={handleClick}>Sign Up</button>
             </div>
             <div className="premium">
                 <h2>Premium</h2>
