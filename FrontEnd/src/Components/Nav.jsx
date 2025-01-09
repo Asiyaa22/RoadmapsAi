@@ -5,7 +5,7 @@ function Nav(){
                 <li><a href="http://" target="_blank" rel="noopener noreferrer">Home</a></li>
                 <li><a href="http://" target="_blank" rel="noopener noreferrer">About US</a></li>
             </ul>
-            <button>Get Started 🚀</button>
+            <button className="regis-btn">Register</button>
         </div>
     )
 
