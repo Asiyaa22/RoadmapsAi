@@ -33,7 +33,8 @@ app.get("/", (req, res) => {
 
 app.get("/plan", (req, res) => {
     // res.render("plan.ejs");
-    res.send("plans wala page")
+    res.sendStatus(200).json({ message: "Plan Route" });
+    console.log("Plan Route");
 });
 
 app.listen(3000, () => {
