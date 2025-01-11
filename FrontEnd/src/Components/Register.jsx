@@ -1,4 +1,10 @@
+import { useNavigate } from "react-router-dom";
 function Register(){
+    const navigate = useNavigate();
+
+    function handleClickRegister(){
+        navigate("/main");
+    }
     return (
         <div className="wrap">
         <div className="register">
@@ -8,7 +14,7 @@ function Register(){
                <input type="mail" name="mail" id="" placeholder="mail"/>
                <input type="text" name="ph_no" id="" placeholder="Phone N0."/>
                <input type="password" name="password" id="" placeholder="password"/>
-               <button className="btn">Register</button>
+               <button className="btn" onClick={handleClickRegister}>Register</button>
             </form>
         </div>
         </div>
