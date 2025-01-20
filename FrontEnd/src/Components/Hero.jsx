@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Hero(){
+    const [message, setMessage] = useState("");
+    useEffect(() => {
+      //call the backend API
+      axios.get("/")
+      .then(response => setMessage(response.data.message))
+      .catch(error => console.error("Error is:", error))
+    }, []);
     const navigate = useNavigate();
 
     function handleCLickNavigate(){
@@ -45,6 +53,7 @@ function Hero(){
     }, [showPlans]);
     return (
         <div className="hero-content">
+            <div><p>{message}</p></div>
             <div className="content-1">
             <h2>You are not Stuck</h2>
             <h2>You just need a good Roadmap</h2>

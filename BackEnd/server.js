@@ -27,15 +27,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-    res.send("Building Roadmaps powered by AI🚀");
-});
+// app.get("/", (req, res) => {
+//     res.send("Building Roadmaps powered by AI🚀");
+// });
 
-app.get("/plan", (req, res) => {
-    // res.render("plan.ejs");
-    res.sendStatus(200).json({ message: "Plan Route" });
-    console.log("Plan Route");
-});
+app.get("/", (req, res) => {
+    res.json({ message: "Hello from Backend" });
+})
+
+// app.get("/plan", (req, res) => {
+//     // res.render("plan.ejs");
+//     res.sendStatus(200).json({ message: "Plan Route" });
+//     console.log("Plan Route");
+// });
 
 app.listen(3000, () => {
     console.log(`Server is running on port ${port}`);
