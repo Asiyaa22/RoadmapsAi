@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import env from "dotenv";
 import pg from "pg";
-import cors from "cors";
+import bcrypt from "bcrypt";
+// import cors from "cors";
 
 env.config();
 
@@ -23,7 +24,7 @@ db.connect();
 
 //middlewares
 app.use(express.static("public"));
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -31,15 +32,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     res.send("Building Roadmaps powered by AI🚀");
 // });
 
-app.get("/", (req, res) => {
-    res.json({ message: "Hello from Backend" });
+app.get("/api/road", (req, res) => {
+    res.send("Hello from Backend");
 })
 
-// app.get("/plan", (req, res) => {
-//     // res.render("plan.ejs");
-//     res.sendStatus(200).json({ message: "Plan Route" });
-//     console.log("Plan Route");
-// });
+app.post("/api/register", (req, res) => {
+    const { name, mail, ph_no, password} = req.body;
+    console.log("Data Received", name, mail, ph_no, password);
+    //hashing password
+    bcrypt.hash(password, 10, async(err, hash) => {
+        if(err){
+            console.error("Error hashing password", err)
+        }else{
+            //inserting into database
+            const saveData = await db.query("INSERT INTO usersInfo(name, mail, ph_no, password) VALUES($1, $2, $3, $4)",[name, mail, ph_no, hash])
+            console.log("Data Saved Successfully", saveData);
+        }
+    })
+    res.send("User Registered Successfully");
+})
 
 app.listen(3000, () => {
     console.log(`Server is running on port ${port}`);
